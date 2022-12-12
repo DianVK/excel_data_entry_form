@@ -2,9 +2,7 @@
 # Excel Data Entry Form
 
 Simple project made with Tkinter - user data entry form.
-
-![form](https://user-images.githubusercontent.com/115580585/207137708-2a4c1f68-b818-445e-9c95-e55bc6727492.gif)
-
+![github](https://user-images.githubusercontent.com/115580585/207138316-1509c691-176f-4f8f-8019-652d4eca2049.gif)
 ## Features
 
  - The form asks for valid - username, password, salary and email.

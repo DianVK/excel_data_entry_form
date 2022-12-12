@@ -14,4 +14,4 @@ Simple project made with Tkinter - user data entry form.
  - The validation is by regular expressions.
  - The storing into the file is with crypted password, salary in USD.
  - The crypting is made with bcrypt and it is encoding the password into a utf-8 byte code.
-
+ - The program checks if the Excel file exists,if not creates it.

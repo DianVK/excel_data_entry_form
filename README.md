@@ -8,7 +8,7 @@ Simple project made with Tkinter - user data entry form.
 
 
 
-## Acknowledgements
+## Features
 
  - The form asks for valid - username, password, salary and email.
  - The validation is by regular expressions.

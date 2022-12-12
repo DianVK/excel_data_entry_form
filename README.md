@@ -3,10 +3,7 @@
 
 Simple project made with Tkinter - user data entry form.
 
-![form](https://user-images.githubusercontent.com/115580585/207113290-c2b98315-6ee3-4d3c-845c-88dec837a0d3.gif)
-
-
-
+![form](https://user-images.githubusercontent.com/115580585/207137708-2a4c1f68-b818-445e-9c95-e55bc6727492.gif)
 
 ## Features
 

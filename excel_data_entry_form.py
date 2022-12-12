@@ -10,13 +10,22 @@ wb = Workbook()
 ws = wb.active
 
 ws.append(["username", "password", "salary", "e-mail"])
-#checks if the database file exists,if not - creates it
+#checks if the excel file exists,if not - creates it
 current_file_dir = os. getcwd()
 database_file_dir = str(current_file_dir) + "\\user_data.xlsx"
 if not os.path.isfile(database_file_dir):
     wb.save("user_data.xlsx")
 
+def file_exist():
+    wb = Workbook()
+    ws = wb.active
 
+    ws.append(["username", "password", "salary", "e-mail"])
+    # checks if the database file exists,if not - creates it
+    current_file_dir = os.getcwd()
+    database_file_dir = str(current_file_dir) + "\\user_data.xlsx"
+    if not os.path.isfile(database_file_dir):
+        wb.save("user_data.xlsx")
 def username_validation(name):
     valid_username = re.compile(r'^(?![-._])(?!.*[_.-]{2})[\w.-]{6,30}(?<![-._])$')
     if valid_username.match(name) is None:
@@ -94,8 +103,8 @@ def check_data():
     os.system("../My_Projects/user_data.xlsx")
 
 
+file_exist()
 master = Tk()
-
 Label(master, text="username").grid(row=0)
 Label(master, text="password").grid(row=1)
 Label(master, text="salary").grid(row=2)

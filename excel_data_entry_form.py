@@ -6,38 +6,38 @@ from openpyxl import Workbook
 from tkinter import *
 from tkinter import messagebox
 
-wb = Workbook()
-ws = wb.active
 
-ws.append(["username", "password", "salary", "e-mail"])
-#checks if the excel file exists,if not - creates it
-current_file_dir = os. getcwd()
-database_file_dir = str(current_file_dir) + "\\user_data.xlsx"
-if not os.path.isfile(database_file_dir):
-    wb.save("user_data.xlsx")
-
-def file_exist():
+def check_file():
+    # checks if the excel file exists,if not - creates it
     wb = Workbook()
     ws = wb.active
-
-    ws.append(["username", "password", "salary", "e-mail"])
-    # checks if the database file exists,if not - creates it
     current_file_dir = os.getcwd()
     database_file_dir = str(current_file_dir) + "\\user_data.xlsx"
-    if not os.path.isfile(database_file_dir):
+    file_exists = os.path.isfile(database_file_dir)
+    if not file_exists:
+        wb = Workbook()
+        ws = wb.active
+        ws.append(["username", "password", "salary", "e-mail"])
         wb.save("user_data.xlsx")
+
+
 def username_validation(name):
+    # valid username should contain - between 6 and 30 chars, letters ,numbers, dots ,underscores and dashes
     valid_username = re.compile(r'^(?![-._])(?!.*[_.-]{2})[\w.-]{6,30}(?<![-._])$')
     if valid_username.match(name) is None:
-        messagebox.showerror("Error", "Invalid username!")
+        messagebox.showerror("Error", "Invalid username!\n"
+                                      "Username should contain minimum 6 to 30 characters!\n"
+                                      "Letters, numbers, dots, underscores and dashes are allowed!")
         return False
     return True
 
 
 def password_validation(password):
+    # valid password should contain atleast - 8 chars, an upper and a lower letter , a digit and a special symbol
     valid_password = re.compile(r'^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$')
     if valid_password.match(password) is None:
-        messagebox.showerror("Error", "Invalid password!")
+        messagebox.showerror("Error", "Invalid password!\n"
+                                      "Password should contain minimum 8 characters, an upper and a lower letter, a digit and a special symbol!")
         return False
     return True
 
@@ -52,13 +52,13 @@ def encrypted_password(password):
 
 def salary_validation(salary):
     if len(salary) < 4:
-        messagebox.showerror("Error", "Invalid salary!")
+        messagebox.showerror("Error", "Invalid salary!\nSalary should contain at least 4 digits!")
         return False
 
     for char in range(len(salary)):
         current_char = salary[char]
         if not current_char.isdigit():
-            messagebox.showerror("Error", "Invalid salary!")
+            messagebox.showerror("Error", "Invalid salary!\nSalary should contain only digits!")
             return False
     return True
 
@@ -72,7 +72,7 @@ def email_validation(email):
 
 
 def submit_data():
-    path = '../My_Projects/user_data.xlsx'
+    path = 'user_data.xlsx'
     df1 = pd.read_excel(path)
     row_a = df1['username']
     row_b = df1['password']
@@ -81,7 +81,7 @@ def submit_data():
 
     username, password, salary, email = entry_username.get(), entry_password.get(), entry_salary.get(), entry_email.get()
     if username_validation(username) and password_validation(password) and salary_validation(salary) \
-        and email_validation(email):
+            and email_validation(email):
         final_password = encrypted_password(password)
         A = pd.Series(username)
         B = pd.Series(final_password)
@@ -100,10 +100,10 @@ def submit_data():
 
 
 def check_data():
-    os.system("../My_Projects/user_data.xlsx")
+    os.system("user_data.xlsx")
 
 
-file_exist()
+check_file()
 master = Tk()
 Label(master, text="username").grid(row=0)
 Label(master, text="password").grid(row=1)
